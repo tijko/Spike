@@ -9,7 +9,7 @@ trigger:
 pool:
   name: 'default'
   demands:
-  - Agent.Version -equals 2.144.0
+  - Agent.Version -equals 2.144.2
 
 variables:
   solution: '**/*.sln'

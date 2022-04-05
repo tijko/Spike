@@ -16,14 +16,6 @@ variables:
 steps:
 - task: NuGetToolInstaller@1
   displayName: 'Install Nuget tools'
-
-- task: VisualStudioTestPlatformInstaller@1
-  displayName: 'Visual Studio Platform Install'
-  inputs:
-    packageFeedSelector: 'nugetOrg'
-    versionSelector: 'latestStable'
-    testPlatformVersion: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
   
 - task: VSTest@2
   displayName: 'Run Unit Tests'

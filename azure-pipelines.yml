@@ -17,37 +17,38 @@ steps:
 - task: NuGetToolInstaller@1
   displayName: 'Install Nuget tools'
 
-#- task: NuGetCommand@2
-#  displayName: 'Nuget restore'
-#  inputs:
-#    restoreSolution: '$(solution)'
-#    command: restore
+- task: NuGetCommand@2
+  displayName: 'Nuget restore'
+  inputs:
+    restoreSolution: '$(solution)'
+    command: restore
 
-#- task: VisualStudioTestPlatformInstaller@1
-#  displayName: 'Visual Studio Platform Install'
-#  inputs:
-#    packageFeedSelector: 'nugetOrg'
-#    versionSelector: 'latestStable'
-#    testPlatformVersion: '$(buildPlatform)'
-#    configuration: '$(buildConfiguration)'
+- task: VisualStudioTestPlatformInstaller@1
+  displayName: 'Visual Studio Platform Install'
+  inputs:
+    packageFeedSelector: 'nugetOrg'
+    versionSelector: 'latestStable'
+    testPlatformVersion: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
 
-#- task: VSBuild@1
-  #inputs:
-  #  solution: '$(solution)'
-  #  msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)"'
-  #  platform: '$(buildPlatform)'
-  #  configuration: '$(buildConfiguration)'
-  #
-#- task: VSTest@2
-#  displayName: 'Run Unit Tests'
-#  inputs:
-#    vsTestVersion: 'toolsInstaller'
-#    testAssemblyVer2: '**/bin/$(buildConfiguration)/*.dll'
-#    platform: '$(buildPlatform)'
-#    configuration: '$(buildConfiguration)'
-#    codeCoverageEnabled: true
-#    runTestsInIsolation: true
-#    resultsFolder: '$(System.DefaultWorkingDirectory)\TestResults'
+- task: VSBuild@1
+  inputs:
+    solution: '$(solution)'
+    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)"'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+  
+- task: VSTest@2
+  displayName: 'Run Unit Tests'
+  inputs:
+    vsTestVersion: 'toolsInstaller'
+    testAssemblyVer2: '**/bin/$(buildConfiguration)/*.dll'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+    codeCoverageEnabled: true
+    runTestsInIsolation: true
+    resultsFolder: '$(System.DefaultWorkingDirectory)\TestResults'
+
 - task: DotNetCoreCLI@2
   displayName: 'Hack'
   inputs:

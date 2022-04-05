@@ -29,6 +29,7 @@ steps:
     configuration: 'release'
     createLogFile: true
     logFileVerbosity: 'detailed'
+    msbuildArgs: 'restore'
 
 - task: VSTest@2
   displayName: 'Run Unit Tests'

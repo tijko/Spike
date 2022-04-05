@@ -22,14 +22,11 @@ steps:
     packageFeedSelector: 'nugetOrg' # Options: nugetOrg, customFeed, netShare
     versionSelector: 'latestPreRelease' 
 
-- task: VSBuild@1
-  inputs:
-    solution: '**\*.sln'
-    vsVersion: 'latest'
-    configuration: 'release'
-    createLogFile: true
-    logFileVerbosity: 'detailed'
-    msbuildArgs: 'restore'
+-task: DotNetCoreCLI@2
+ inputs:
+   commands: 'build'
+   publishTestResults: true
+   verbosityPack: 'diagnostic'
 
 - task: VSTest@2
   displayName: 'Run Unit Tests'

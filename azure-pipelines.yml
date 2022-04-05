@@ -9,7 +9,7 @@ trigger:
 pool:
   name: 'default'
   demands:
-  - Agent.Name -eq 'ubuntu_spike_agent'
+  - Agent.Name -equals 'ubuntu_spike_agent'
 
 variables:
   solution: '**/*.sln'

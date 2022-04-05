@@ -7,8 +7,6 @@ trigger:
 
 pool:
   name: 'default'
-  demands:
-    - Agent.Name -equals "mydockeragent"
 
 variables:
   solution: '**/*.sln'

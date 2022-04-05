@@ -17,25 +17,12 @@ steps:
 - task: NuGetToolInstaller@1
   displayName: 'Install Nuget tools'
 
-- task: NuGetCommand@2
-  displayName: 'Nuget restore'
-  inputs:
-    restoreSolution: '$(solution)'
-    command: restore
-
 - task: VisualStudioTestPlatformInstaller@1
   displayName: 'Visual Studio Platform Install'
   inputs:
     packageFeedSelector: 'nugetOrg'
     versionSelector: 'latestStable'
     testPlatformVersion: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
-
-- task: VSBuild@1
-  inputs:
-    solution: '$(solution)'
-    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)"'
-    platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
   
 - task: VSTest@2
@@ -48,13 +35,6 @@ steps:
     codeCoverageEnabled: true
     runTestsInIsolation: true
     resultsFolder: '$(System.DefaultWorkingDirectory)\TestResults'
-
-- task: DotNetCoreCLI@2
-  displayName: 'Hack'
-  inputs:
-    command: custom
-    projects: '**/*.dll'
-    arguments: '--logger:trx;logfilename=TestResults/tests.trx'
 
 - task: PublishTestResults@2
   displayName: 'Publish Test Results'

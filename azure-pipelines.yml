@@ -17,11 +17,11 @@ steps:
 - task: NuGetToolInstaller@1
   displayName: 'Install Nuget tools'
 
-- task: NuGetCommand@2
-  displayName: 'Nuget restore'
-  inputs:
-    restoreSolution: '$(solution)'
-    command: restore
+#- task: NuGetCommand@2
+#  displayName: 'Nuget restore'
+#  inputs:
+#    restoreSolution: '$(solution)'
+#    command: restore
 
 - task: VisualStudioTestPlatformInstaller@1
   displayName: 'Visual Studio Platform Install'

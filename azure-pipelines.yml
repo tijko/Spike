@@ -9,7 +9,7 @@ trigger:
 pool:
   name: 'default'
   demands:
-  - Agent.Version -equals 2.144.2
+  - Agent.Name -eq 'ubuntu_spike_agent'
 
 variables:
   solution: '**/*.sln'
@@ -18,13 +18,16 @@ variables:
 
 steps:
 - task: NuGetToolInstaller@1
+  displayName: 'Install Nuget tools'
 
 - task: NuGetCommand@2
+  displayName: 'Nuget restore'
   inputs:
     restoreSolution: '$(solution)'
     command: restore
 
 - task: VisualStudioTestPlatformInstaller@1
+  displayName: 'Visual Studio Platform Install'
   inputs:
     packageFeedSelector: 'nugetOrg'
     versionSelector: 'latestStable'
@@ -50,6 +53,7 @@ steps:
     resultsFolder: '$(System.DefaultWorkingDirectory)\TestResults'
 
 - task: PublishTestResults@2
+  displayName: 'Publish Test Results'
   inputs:
     testResultsFormat: 'VSTest'
     testResultsFiles: '**/TestResults/*.trx' 

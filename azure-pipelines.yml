@@ -23,13 +23,13 @@ steps:
 #    restoreSolution: '$(solution)'
 #    command: restore
 
-- task: VisualStudioTestPlatformInstaller@1
-  displayName: 'Visual Studio Platform Install'
-  inputs:
-    packageFeedSelector: 'nugetOrg'
-    versionSelector: 'latestStable'
-    testPlatformVersion: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+#- task: VisualStudioTestPlatformInstaller@1
+#  displayName: 'Visual Studio Platform Install'
+#  inputs:
+#    packageFeedSelector: 'nugetOrg'
+#    versionSelector: 'latestStable'
+#    testPlatformVersion: '$(buildPlatform)'
+#    configuration: '$(buildConfiguration)'
 
 #- task: VSBuild@1
   #inputs:
@@ -38,16 +38,22 @@ steps:
   #  platform: '$(buildPlatform)'
   #  configuration: '$(buildConfiguration)'
   #
-- task: VSTest@2
-  displayName: 'Run Unit Tests'
-  inputs:
-    vsTestVersion: 'toolsInstaller'
-    testAssemblyVer2: '**/bin/$(buildConfiguration)/*.dll'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
-    codeCoverageEnabled: true
-    runTestsInIsolation: true
-    resultsFolder: '$(System.DefaultWorkingDirectory)\TestResults'
+#- task: VSTest@2
+#  displayName: 'Run Unit Tests'
+#  inputs:
+#    vsTestVersion: 'toolsInstaller'
+#    testAssemblyVer2: '**/bin/$(buildConfiguration)/*.dll'
+#    platform: '$(buildPlatform)'
+#    configuration: '$(buildConfiguration)'
+#    codeCoverageEnabled: true
+#    runTestsInIsolation: true
+#    resultsFolder: '$(System.DefaultWorkingDirectory)\TestResults'
+-task: DotNetCoreCLI@2
+ displayName: 'Hack'
+ inputs:
+   command: custom
+   projects: '**/*.dll'
+   arguments: '--logger:trx;logfilename=TestResults/tests.trx'
 
 - task: PublishTestResults@2
   displayName: 'Publish Test Results'

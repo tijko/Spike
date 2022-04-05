@@ -31,7 +31,7 @@ steps:
     configuration: '$(buildConfiguration)'
     codeCoverageEnabled: true
     runTestsInIsolation: true
-    resultsFolder: '$(System.DefaultWorkingDirectory)\TestResults'
+    resultsFolder: '$(System.DefaultWorkingDirectory)/TestResults'
 
 - task: PublishTestResults@2
   displayName: 'Publish Test Results'

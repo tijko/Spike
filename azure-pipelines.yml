@@ -48,12 +48,12 @@ steps:
 #    codeCoverageEnabled: true
 #    runTestsInIsolation: true
 #    resultsFolder: '$(System.DefaultWorkingDirectory)\TestResults'
--task: DotNetCoreCLI@2
- displayName: 'Hack'
- inputs:
-   command: custom
-   projects: '**/*.dll'
-   arguments: '--logger:trx;logfilename=TestResults/tests.trx'
+- task: DotNetCoreCLI@2
+  displayName: 'Hack'
+  inputs:
+    command: custom
+    projects: '**/*.dll'
+    arguments: '--logger:trx;logfilename=TestResults/tests.trx'
 
 - task: PublishTestResults@2
   displayName: 'Publish Test Results'

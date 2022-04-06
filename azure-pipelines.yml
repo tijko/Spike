@@ -17,6 +17,17 @@ steps:
 - task: NuGetToolInstaller@1
   displayName: 'Install Nuget tools'
 
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Source file location
+      $source = 'https://dist.nuget.org/win-x86-commandline/v6.0.0-preview3/nuget.exe'
+      # Destination to save the file
+      $destination = '$(Agent.TempDirectory)\nuget.exe'
+      #Download the file
+      Invoke-WebRequest -Uri $source -OutFile $destination
+
 - task: VisualStudioTestPlatformInstaller@1
   inputs:
     packageFeedSelector: 'nugetOrg' # Options: nugetOrg, customFeed, netShare
@@ -26,11 +37,6 @@ steps:
   inputs:
     version: '5.0.x'
     includePreviewVersions: true # Required for preview versions
-
-- task: UseDotNet@2
-  inputs:
-    version: '3.0.x'
-    packageType: runtime
 
 - task: UseDotNet@2
   displayName: 'Install .NET Core SDK'

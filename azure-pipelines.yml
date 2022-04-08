@@ -39,17 +39,6 @@ steps:
     publishTestResults: true
     verbosityPack: 'diagnostic'
 
-- task: VSTest@2
-  displayName: 'Run Unit Tests'
-  inputs:
-    vsTestVersion: 'toolsInstaller'
-    testAssemblyVer2: '**/bin/$(buildConfiguration)/*.dll'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
-    codeCoverageEnabled: true
-    runTestsInIsolation: true
-    resultsFolder: '$(System.DefaultWorkingDirectory)/TestResults'
-
 - task: PublishTestResults@2
   displayName: 'Publish Test Results'
   inputs:

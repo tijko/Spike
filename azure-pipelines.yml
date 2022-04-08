@@ -4,6 +4,7 @@
 
 trigger:
 - master
+  linux-container
 
 pool:
   name: 'default'
@@ -17,22 +18,6 @@ steps:
 - task: NuGetToolInstaller@1
   displayName: 'Install Nuget tools'
 
-- task: PowerShell@2
-  inputs:
-    targetType: 'inline'
-    script: |
-      # Source file location
-      $source = 'https://dist.nuget.org/win-x86-commandline/v6.0.0-preview3/nuget.exe'
-      # Destination to save the file
-      $destination = '$(Agent.TempDirectory)\nuget.exe'
-      #Download the file
-      Invoke-WebRequest -Uri $source -OutFile $destination
-
-- task: VisualStudioTestPlatformInstaller@1
-  inputs:
-    packageFeedSelector: 'nugetOrg' # Options: nugetOrg, customFeed, netShare
-    versionSelector: 'latestPreRelease' 
-
 - task: UseDotNet@2
   displayName: 'Install .NET Core SDK'
   inputs:
@@ -41,8 +26,16 @@ steps:
     includePreviewVersions: true # Required for preview versions
 
 - task: DotNetCoreCLI@2
+  displayName: 'Building'
   inputs:
     commands: 'build'
+    publishTestResults: true
+    verbosityPack: 'diagnostic'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Testing'
+  inputs:
+    commands: 'test'
     publishTestResults: true
     verbosityPack: 'diagnostic'
 

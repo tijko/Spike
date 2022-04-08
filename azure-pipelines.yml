@@ -33,16 +33,16 @@ steps:
     verbosityPack: 'diagnostic'
 
 - task: DotNetCoreCLI@2
-  displayName: 'Testing'
+  displayName: 'Test'
   inputs:
-    commands: 'test'
+    command: 'test'
     publishTestResults: true
     verbosityPack: 'diagnostic'
 
 - task: DotNetCoreCLI@2
-  displayName: 'Testing'
+  displayName: 'VS Test'
   inputs:
-    commands: 'vstest'
+    command: 'vstest'
     publishTestResults: true
     verbosityPack: 'diagnostic'
 

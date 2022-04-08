@@ -4,7 +4,7 @@
 
 trigger:
 - master
-  linux-container
+- linux-container
 
 pool:
   name: 'default'

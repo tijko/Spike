@@ -5,6 +5,7 @@
 trigger:
 - master
 - linux-container
+- custom
 
 pool:
   name: 'default'
@@ -34,7 +35,8 @@ steps:
 - task: DotNetCoreCLI@2
   displayName: 'Test'
   inputs:
-    command: 'test'
+    command: 'custom'
+    custom: 'vstest'
     arguments: --logger trx --results-directory "/azp/_work/_temp/TestResults/"
     publishTestResults: false
     verbosityPack: 'diagnostic'

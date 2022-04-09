@@ -35,11 +35,17 @@ steps:
 - task: DotNetCoreCLI@2
   displayName: 'Test'
   inputs:
-    command: 'custom'
-    custom: 'vstest'
+    command: 'test'
     arguments: --logger trx --results-directory "/azp/_work/_temp/TestResults/"
     publishTestResults: false
     verbosityPack: 'diagnostic'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Test'
+  inputs:
+    command: 'custom'
+    custom: 'vstest'
+    arguments: --logger:trx;logfilename=Test.xml
 
 - task: PublishTestResults@2
   displayName: 'Publish Test Results'

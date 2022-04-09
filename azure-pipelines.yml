@@ -35,7 +35,7 @@ steps:
   displayName: 'Test'
   inputs:
     command: 'test'
-    arguments: --logger trx --results-directory "**/TestResults/test-results.trx" --collect "Code coverage"
+    arguments: --logger trx --results-directory "**/TestResults/" --collect "Code coverage"
     verbosityPack: 'diagnostic'
 
 - task: PublishTestResults@2

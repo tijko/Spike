@@ -29,14 +29,13 @@ steps:
   displayName: 'Building'
   inputs:
     commands: 'build'
-    publishTestResults: true
     verbosityPack: 'diagnostic'
 
 - task: DotNetCoreCLI@2
   displayName: 'Test'
   inputs:
     command: 'test'
-    publishTestResults: true
+    arguments: --logger trx --results-directory "**/TestResults/test-results.trx" --collect "Code coverage"
     verbosityPack: 'diagnostic'
 
 - task: PublishTestResults@2

@@ -24,7 +24,7 @@ steps:
     version: 6.0.x
     performMultiLevelLookup: true
     includePreviewVersions: true
-
+    # dotnet tool install dotnet-vstest
 - task: DotNetCoreCLI@2
   displayName: 'Building'
   inputs:
@@ -36,13 +36,6 @@ steps:
   displayName: 'Test'
   inputs:
     command: 'test'
-    publishTestResults: true
-    verbosityPack: 'diagnostic'
-
-- task: DotNetCoreCLI@2
-  displayName: 'VS Test'
-  inputs:
-    command: 'vstest'
     publishTestResults: true
     verbosityPack: 'diagnostic'
 

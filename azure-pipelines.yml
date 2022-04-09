@@ -45,7 +45,7 @@ steps:
   inputs:
     command: 'custom'
     custom: 'vstest'
-    arguments: --logger:trx;logfilename=Test.xml
+    arguments: /azp/_work/1/s/Spike/bin/Debug/net6.0/Spike.dll --logger:trx;logfilename=Test.xml
 
 - task: PublishTestResults@2
   displayName: 'Publish Test Results'

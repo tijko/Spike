@@ -41,7 +41,7 @@ steps:
     verbosityPack: 'diagnostic'
 
 - task: DotNetCoreCLI@2
-  displayName: 'Test'
+  displayName: 'VSTest'
   inputs:
     command: 'custom'
     custom: 'vstest'

@@ -60,3 +60,24 @@ namespace Chain
         }
     }
 }
+
+namespace Link
+{ 
+    public class UnitTest3
+    {
+        private const string classStr = "A";
+
+        [Theory]
+        [InlineData("ABCDEFG")]
+        [InlineData("ABCDEF")]
+        [InlineData("ABCDE")]
+        [InlineData("ABCD")]
+        [InlineData("ABC")]
+        [InlineData("AB")]
+        [InlineData("A")]
+        public void ExtendingStringCmp(string value)
+        {
+            Assert.StartsWith(classStr, value);
+        }
+    }
+}

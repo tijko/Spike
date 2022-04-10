@@ -47,7 +47,7 @@ namespace Animal
         public void stringComp()
         {
             string str1 = "Animal-UnitTest2";
-            Assert.True(str.Equals(classStr));
+            Assert.True(str1.Equals(classStr));
         }
     }
 }

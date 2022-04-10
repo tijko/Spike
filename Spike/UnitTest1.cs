@@ -37,7 +37,7 @@ namespace Spike
     }
 }
 
-namespace Animal
+namespace Chain
 {
     public class UnitTest2 
     {

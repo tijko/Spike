@@ -27,15 +27,6 @@ steps:
     includePreviewVersions: true
 
 - task: DotNetCoreCLI@2
-  displayName: 'Info'
-  inputs:
-    commands: 'custom'
-    custom: ''
-    arguments: '--no-restore --info'
-    nobuild: true
-    verbosityPack: 'diagnostic'
-
-- task: DotNetCoreCLI@2
   displayName: 'Building'
   inputs:
     commands: 'build'

@@ -50,7 +50,7 @@ steps:
     custom: 'vstest'
     arguments: $(Agent.BuildDirectory)/s/Spike/bin/Debug/net6.0/Spike.dll --logger:trx;logfilename=Test.xml
 
-- task: NuGetCommand@2
+- task: DotNetCoreCLI@2
   displayName: 'Pack'
   inputs:
     command: pack

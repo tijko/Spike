@@ -47,6 +47,13 @@ steps:
     custom: 'vstest'
     arguments: $(Agent.BuildDirectory)/s/Spike/bin/Debug/net6.0/Spike.dll --logger:trx;logfilename=Test.xml
 
+#- task: DotNetCoreCLI@2
+ # displayName: 'Tooling'
+#  inputs:
+#    command: 'custom'
+#    custom: 'tool'
+#    arguments: 'install --global dotnet-ef'
+
 - task: PublishTestResults@2
   displayName: 'Publish Test Results'
   inputs:

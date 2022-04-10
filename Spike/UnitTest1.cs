@@ -11,7 +11,7 @@ namespace Spike
         }
 
         [Fact]
-        public void FailingTest()
+        public void IsPassingTest()
         {
             Assert.Equal(5, Add(3, 2));
         }
@@ -33,6 +33,21 @@ namespace Spike
         int Add(int x, int y)
         { 
             return x + y; 
+        }
+    }
+}
+
+namespace Animal
+{
+    public class UnitTest2 
+    {
+        const string classStr = "Animal-UnitTest2";
+
+        [Fact]
+        public void stringComp()
+        {
+            string str1 = "Animal-UnitTest2";
+            Assert.True(str.Equals(classStr));
         }
     }
 }

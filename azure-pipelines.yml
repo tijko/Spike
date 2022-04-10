@@ -76,6 +76,7 @@ steps:
   displayName: 'NuGet push'
   inputs:
     command: push
+    packagesToPush: $(Build.ArtifactDirectory)/**/*.nupkg
     publishVstsFeed: 'CAM/TKONFeed'
     allowPackageConflicts: true
 

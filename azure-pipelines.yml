@@ -11,6 +11,9 @@ pool:
   name: 'default'
 
 variables:
+  Major: '0'
+  Minor: '0'
+  Patch: '0'
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
@@ -47,12 +50,34 @@ steps:
     custom: 'vstest'
     arguments: $(Agent.BuildDirectory)/s/Spike/bin/Debug/net6.0/Spike.dll --logger:trx;logfilename=Test.xml
 
-#- task: DotNetCoreCLI@2
- # displayName: 'Tooling'
-#  inputs:
-#    command: 'custom'
-#    custom: 'tool'
-#    arguments: 'install --global dotnet-ef'
+- task: NuGetCommand@2
+  displayName: 'Pack'
+  inputs:
+    command: pack
+    versioningScheme: byPrereleaseNumber
+    majorVersion: '$(Major)'
+    minorVersion: '$(Minor)'
+    patchVersion: '$(Patch)'
+    packagesToPack: '**/*.csproj'
+    packDestination: '$(Build.ArtifactStagingDirectory)'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Publish'
+  inputs:
+    commands: 'publish'
+    nobuild: true
+    feedsToUse: config
+    nugetConfigPath: $(Build.Repository.LocalPath)/Spike/
+    verbosityPack: 'diagnostic'
+
+- task: NuGetAuthenticate@0
+  displayName: 'NuGet Authenticate'
+- task: NuGetCommand@2
+  displayName: 'NuGet push'
+  inputs:
+    command: push
+    publishVstsFeed: 'CAM/TKONFeed'
+    allowPackageConflicts: true
 
 - task: PublishTestResults@2
   displayName: 'Publish Test Results'

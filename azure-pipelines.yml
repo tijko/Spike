@@ -30,8 +30,8 @@ steps:
   displayName: 'Info'
   inputs:
     commands: 'custom'
-    custom: '--info'
-    arguments: '--no-restore'
+    custom: ''
+    arguments: '--no-restore --info'
     nobuild: true
     verbosityPack: 'diagnostic'
 

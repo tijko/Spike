@@ -30,8 +30,8 @@ steps:
   displayName: 'Info'
   inputs:
     commands: 'custom'
-    custom: ''
-    arguments: '--info'
+    custom: '--info'
+    arguments: '--no-restore'
     nobuild: true
     verbosityPack: 'diagnostic'
 
@@ -45,7 +45,7 @@ steps:
   displayName: 'Test'
   inputs:
     command: 'test'
-    arguments: --logger trx --results-directory "/azp/_work/_temp/TestResults/"
+    arguments: --logger trx --results-directory "$(Agent.TempDirectory)/TestResults/"
     publishTestResults: false
     verbosityPack: 'diagnostic'
 
@@ -54,10 +54,10 @@ steps:
   inputs:
     command: 'custom'
     custom: 'vstest'
-    arguments: /azp/_work/1/s/Spike/bin/Debug/net6.0/Spike.dll --logger:trx;logfilename=Test.xml
+    arguments: $(Agent.BuildDirectory)/s/Spike/bin/Debug/net6.0/Spike.dll --logger:trx;logfilename=Test.xml
 
 - task: PublishTestResults@2
   displayName: 'Publish Test Results'
   inputs:
     testResultsFormat: 'VSTest'
-    testResultsFiles: '/azp/_work/_temp/TestResults/*.trx' 
+    testResultsFiles: '$(Agent.TempDirectory)/TestResults/*.trx' 

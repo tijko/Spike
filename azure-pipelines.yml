@@ -25,7 +25,15 @@ steps:
     version: 6.0.x
     performMultiLevelLookup: true
     includePreviewVersions: true
-    # dotnet tool install dotnet-vstest
+
+- task: DotNetCoreCLI@2
+  displayName: 'Info'
+  inputs:
+    commands: 'custom'
+    custom: ''
+    arguments: '--info'
+    verbosityPack: 'diagnostic'
+
 - task: DotNetCoreCLI@2
   displayName: 'Building'
   inputs:

@@ -49,5 +49,14 @@ namespace Animal
             string str1 = "Animal-UnitTest2";
             Assert.True(str1.Equals(classStr));
         }
+
+        [Theory]
+        [InlineData("1234567890123456")]
+        [InlineData("abcdefghijklmnop")]
+        [InlineData("0123456789abcdef")]
+        public void TwoBytesHexLen(string value)
+        {
+            Assert.Equal(value.Length, classStr.Length);
+        }
     }
 }

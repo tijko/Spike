@@ -70,7 +70,6 @@ steps:
     command: push
     packagesToPush: $(Build.ArtifactStagingDirectory)/*.nupkg
     nuGetFeedType: internal
-    selectOrConfig: 'select'
     nugetConfigPath: '$(Agent.BuildDirectory/s/*.config)'
     publishFeedCredentials: 'TKONFeed'
     allowPackageConflicts: true

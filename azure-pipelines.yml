@@ -69,6 +69,7 @@ steps:
   displayName: 'Push'
   inputs:
     command: push
+    arguments: '--skip-duplicate'
     packagesToPush: $(Build.ArtifactStagingDirectory)/*.nupkg
     nuGetFeedType: external
     feedsToUse: config

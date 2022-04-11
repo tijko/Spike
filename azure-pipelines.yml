@@ -55,6 +55,7 @@ steps:
   displayName: 'Pack'
   inputs:
     command: pack
+    arguments: '--configuration $(buildConfiguration)'
     versioningScheme: byPrereleaseNumber
     majorVersion: '$(Major)'
     minorVersion: '$(Minor)'

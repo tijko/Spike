@@ -71,6 +71,7 @@ steps:
     command: push
     packagesToPush: $(Build.ArtifactStagingDirectory)/*.nupkg
     nuGetFeedType: external
+    feedsToUse: config
     publishFeedCredentials: 'TKONFeed'
     publishVstsFeed: 'CAM/TKONFeed'
     allowPackageConflicts: true

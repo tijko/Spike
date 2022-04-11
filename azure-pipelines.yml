@@ -40,7 +40,7 @@ steps:
   displayName: 'Test'
   inputs:
     command: 'test'
-    arguments: '--configuration $(buildConfiguration)--logger trx --results-directory "$(Agent.TempDirectory)/TestResults/"'
+    arguments: '--configuration $(buildConfiguration) --logger trx --results-directory "$(Agent.TempDirectory)/TestResults/"'
     publishTestResults: false
     verbosityPack: 'diagnostic'
 

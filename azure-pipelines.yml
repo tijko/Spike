@@ -11,9 +11,9 @@ pool:
   name: 'default'
 
 variables:
-  Major: '1'
+  Major: '0'
   Minor: '0'
-  Patch: '0'
+  Patch: '1'
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'

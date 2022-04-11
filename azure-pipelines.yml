@@ -69,7 +69,7 @@ steps:
   inputs:
     command: push
     packagesToPush: $(Build.ArtifactStagingDirectory)/*.nupkg
-    nuGetFeedType: 'external'
+    nuGetFeedType: internal
     selectOrConfig: 'config'
     nugetConfigPath: '$(Agent.BuildDirectory/s/*.config)'
     publishFeedCredentials: 'TKONFeed'

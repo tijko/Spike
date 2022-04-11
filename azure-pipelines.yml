@@ -70,7 +70,6 @@ steps:
     command: push
     packagesToPush: $(Build.ArtifactStagingDirectory)/*.nupkg
     nuGetFeedType: internal
-    publishFeedCredentials: 'TKONFeed'
     allowPackageConflicts: true
 
 - task: DotNetCoreCLI@2

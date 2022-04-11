@@ -59,7 +59,7 @@ steps:
     majorVersion: '$(Major)'
     minorVersion: '$(Minor)'
     patchVersion: '$(Patch)'
-    packagesToPack: '$(Agent.BuildDirectory)/s/*.csproj'
+    packagesToPack: '$(Agent.BuildDirectory)/s/Spike/*.csproj'
     packDestination: '$(Build.ArtifactStagingDirectory)'
 
 - task: NuGetAuthenticate@0

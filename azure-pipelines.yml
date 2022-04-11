@@ -33,13 +33,14 @@ steps:
   displayName: 'Building'
   inputs:
     commands: 'build'
+    arguments: '--configuration $(buildConfiguration)'
     verbosityPack: 'diagnostic'
 
 - task: DotNetCoreCLI@2
   displayName: 'Test'
   inputs:
     command: 'test'
-    arguments: --logger trx --results-directory "$(Agent.TempDirectory)/TestResults/"
+    arguments: '--configuration $(buildConfiguration)--logger trx --results-directory "$(Agent.TempDirectory)/TestResults/"'
     publishTestResults: false
     verbosityPack: 'diagnostic'
 
@@ -54,12 +55,25 @@ steps:
   displayName: 'Pack'
   inputs:
     command: pack
-    versioningScheme: byPrereleaseNumber
+    versioningScheme: byBuildNumber
     majorVersion: '$(Major)'
     minorVersion: '$(Minor)'
     patchVersion: '$(Patch)'
-    packagesToPack: '**/*.csproj'
+    packagesToPack: '$(Agent.BuildDirectory)/s/*.csproj'
     packDestination: '$(Build.ArtifactStagingDirectory)'
+
+- task: NuGetAuthenticate@0
+  displayName: 'NuGet Authenticate'
+- task: NuGetCommand@2
+  displayName: 'NuGet push'
+  inputs:
+    command: push
+    packagesToPush: $(Build.ArtifactStagingDirectory)/*.nupkg
+    nuGetFeedType: 'external'
+    selectOrConfig: 'config'
+    nugetConfigPath: '$(Agent.BuildDirectory/s/*.config)'
+    publishFeedCredentials: 'TKONFeed'
+    allowPackageConflicts: true
 
 - task: DotNetCoreCLI@2
   displayName: 'Publish'
@@ -69,16 +83,6 @@ steps:
     feedsToUse: config
     nugetConfigPath: $(Build.Repository.LocalPath)/Spike/
     verbosityPack: 'diagnostic'
-
-- task: NuGetAuthenticate@0
-  displayName: 'NuGet Authenticate'
-- task: NuGetCommand@2
-  displayName: 'NuGet push'
-  inputs:
-    command: push
-    packagesToPush: $(Build.ArtifactDirectory)/**/*.nupkg
-    publishVstsFeed: 'CAM/TKONFeed'
-    allowPackageConflicts: true
 
 - task: PublishTestResults@2
   displayName: 'Publish Test Results'

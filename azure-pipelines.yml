@@ -72,6 +72,8 @@ steps:
     packagesToPush: $(Build.ArtifactStagingDirectory)/*.nupkg
     nuGetFeedType: external
     feedsToUse: config
+    includesource: true
+    includesymbols: true
     publishFeedCredentials: 'TKONFeed'
     publishVstsFeed: 'CAM/TKONFeed'
     allowPackageConflicts: true
